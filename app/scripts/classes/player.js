@@ -4,9 +4,9 @@ import { computePercentValue, computeToneValue } from '../functions/indicators'
 
 export default class Player {
 
-    constructor (anchor) {
+    constructor (parent) {
 
-        this.anchor = anchor
+        this.parent = parent
 
         this.inc = inc
 
@@ -196,10 +196,12 @@ export default class Player {
             div.appendChild (tone)
             
             div.id = this.div.id
+
+            console.log (div)
             
             // add span to document
             // volumeSlider.parentNode.insertBefore (span, volumeSlider)
-            this.anchor.parentNode.appendChild (div)
+            this.parent.appendChild (div)
             
         }
     

@@ -1,17 +1,21 @@
 import { getBrowser, getState } from './functions/browser'
+import { updateVideo, disableVideo } from './classes/video'
 import Keyboard from './classes/keyboard'
 import Player from './classes/player'
-import { updateVideo, disableVideo } from './classes/video'
+import NewPlayer from './classes/newPlayer'
 
 const videoElement = document.getElementsByClassName ('video-stream html5-main-video')[0]
+// const volumeElement = document.getElementsByClassName ('ytp-time-display notranslate')[0]
 const keyboard = new Keyboard (document)
+// const player = new Player (volumeElement)
+const playerBottomDiv = document.getElementsByClassName ('ytp-chrome-controls')[0]
+const player = new NewPlayer (playerBottomDiv)
+
+player.init ()
 
 keyboard.init ()
 
-const volumeSlider = document.getElementsByClassName ('ytp-time-display notranslate')[0]
-const player = new Player (volumeSlider)
-
-player.init ()
+// player.init ()
 
 const setEvents = () => {
 
@@ -65,7 +69,7 @@ const init = async () => {
 videoElement.oncanplay = () => {
             
     // eslint-disable-next-line no-console
-    console.warn ('init')
+    console.log ('screwmycode for YouTube started')
             
     init ()
             
