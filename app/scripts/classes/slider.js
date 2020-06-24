@@ -1,16 +1,16 @@
 
 import rangeMap from '../functions/rangeMap'
-import { getBrowser } from '../functions/browser'
+import { setState } from '../functions/browser'
 import colors from '../config/colors'
 import { getRainbow } from '../functions/colors'
 
 export default class Slider {
 
-    constructor (element) {
+    constructor (slider) {
         
-        this.slider = element
+        this.slider = slider
 
-        this.browser = getBrowser ()
+        this.maxWidth = 80
 
         this.setEvents (this.slider)
     
@@ -20,13 +20,8 @@ export default class Slider {
 
         dom.oninput = async (e) => {
 
-            const storage = await this.browser.storage.local.get ()
+            setState ('speed', e.target.value)
 
-            await this.browser.storage.local.set ({
-                ...storage,
-                'speed': e.target.value,
-            })
-        
         }
     
     }
@@ -75,7 +70,7 @@ export default class Slider {
                 
             this.slider.style.setProperty ('--slider-fill-border-right', '0px')
                 
-            this.slider.style.setProperty ('--slider-fill-padding-left', rangeMap (value, 1, 0.5, 0, 100) + 'px')
+            this.slider.style.setProperty ('--slider-fill-padding-left', rangeMap (value, 1, 0.5, 0, this.maxWidth / 2) + 'px')
     
             this.slider.style.setProperty ('--slider-fill-border-left', '7px')
             
@@ -87,7 +82,7 @@ export default class Slider {
     
             this.slider.style.setProperty ('--slider-fill-border-left', '0px')
             
-            this.slider.style.setProperty ('--slider-fill-padding-right', rangeMap (value, 1, 1.5, 0, 100) + 'px')
+            this.slider.style.setProperty ('--slider-fill-padding-right', rangeMap (value, 1, 1.5, 0, this.maxWidth / 2) + 'px')
     
             this.slider.style.setProperty ('--slider-fill-border-right', '7px')
                 

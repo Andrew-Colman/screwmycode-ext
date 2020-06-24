@@ -1,21 +1,18 @@
 import { getBrowser, getState } from './functions/browser'
 import { updateVideo, disableVideo } from './classes/video'
 import Keyboard from './classes/keyboard'
-import Player from './classes/player'
-import NewPlayer from './classes/newPlayer'
+// import Player from './classes/player'
+import Player from './classes/newPlayer'
 
-const videoElement = document.getElementsByClassName ('video-stream html5-main-video')[0]
 // const volumeElement = document.getElementsByClassName ('ytp-time-display notranslate')[0]
+const video = document.getElementsByClassName ('video-stream html5-main-video')[0]
 const keyboard = new Keyboard (document)
-// const player = new Player (volumeElement)
-const playerBottomDiv = document.getElementsByClassName ('ytp-chrome-controls')[0]
-const player = new NewPlayer (playerBottomDiv)
-
-player.init ()
+const player = new Player (document.getElementsByClassName ('ytp-chrome-controls')[0])
+const isPlayerUpdating = true
 
 keyboard.init ()
 
-// player.init ()
+player.init ()
 
 const setEvents = () => {
 
@@ -25,23 +22,23 @@ const setEvents = () => {
         switch (changes.isActive.newValue) {
 
             case true:
-                updateVideo (videoElement, changes.speed.newValue)
+                updateVideo (video, changes.speed.newValue)
 
-                player.update (changes.speed.newValue)
+                if (isPlayerUpdating) player.update (changes.speed.newValue)
 
                 break
 
             default:
-                disableVideo (videoElement)
+                disableVideo (video)
         
         }
 
         // first run
         if (changes.speed.newValue !== changes.speed.oldValue && changes.isActive.newValue === true) {
 
-            updateVideo (videoElement, changes.speed.newValue)
+            updateVideo (video, changes.speed.newValue)
 
-            player.update (changes.speed.newValue)
+            if (isPlayerUpdating) player.update (changes.speed.newValue)
         
         }
         
@@ -56,9 +53,9 @@ const init = async () => {
     // init
     if (storage.isActive) {
 
-        updateVideo (videoElement, storage.speed)
+        updateVideo (video, storage.speed)
 
-        player.update (storage.speed)
+        if (isPlayerUpdating) player.update (storage.speed)
 
     }
 
@@ -66,7 +63,7 @@ const init = async () => {
 
 }
 
-videoElement.oncanplay = () => {
+video.oncanplay = () => {
             
     // eslint-disable-next-line no-console
     console.log ('screwmycode for YouTube started')

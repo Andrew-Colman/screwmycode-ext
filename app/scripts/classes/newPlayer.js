@@ -1,4 +1,4 @@
-import Player from './player'
+import Slider from './slider'
 
 export default class NewPlayer {
 
@@ -6,11 +6,11 @@ export default class NewPlayer {
 
         this.parent = parent
 
-        this.child = null
+        this.sliderChild = null
 
-        this.slider = {
+        this.sliderParams = {
             'off': '0',
-            'on': '100px',
+            'on': '200px',
         }
 
         // this.init ()
@@ -19,12 +19,42 @@ export default class NewPlayer {
 
     update (p) {
 
-        this.child.update (p)
+        this.sliderChild.update (p)
     
     }
 
     setEvents () {
         // TODO
+    }
+
+    input () {
+
+        // <input class="slider" type="range" min="0.5" max="1.5" step="0.001" value="1"></input>
+
+        const input = document.createElement ('input')
+
+        input.classList.add ('slider')
+
+        input.type = 'range'
+
+        input.min = 0.5
+
+        input.max = 1.5
+
+        input.step = 0.001
+
+        input.value = 1
+
+        input.innerHTML = 'test'
+
+        this.sliderChild = new Slider (input)
+
+        return input
+    
+    }
+
+    svg () {
+        
     }
 
     init () {
@@ -75,7 +105,7 @@ export default class NewPlayer {
 
         slider.id = 'screw-player-slider'
 
-        slider.style = `width: ${this.slider.off};`
+        slider.style = `width: ${this.sliderParams.off};`
 
         span.appendChild (slider)
         
@@ -85,7 +115,7 @@ export default class NewPlayer {
 
             button.style = 'margin-right: 3px;'
 
-            slider.style = `width: ${this.slider.on};`
+            slider.style = `width: ${this.sliderParams.on};`
 
             button.removeEventListener ('mouseover')
 
@@ -95,7 +125,7 @@ export default class NewPlayer {
             
             const e = event.relatedTarget.className
 
-            console.log (e)
+            // console.log (e)
 
             if (
                 e !== 'style-scope ytd-watch-flexy'
@@ -106,7 +136,7 @@ export default class NewPlayer {
 
             button.style = 'margin-right: 0;'
 
-            slider.style = `width: ${this.slider.off};`
+            slider.style = `width: ${this.sliderParams.off};`
 
             span.removeEventListener ('mouseout')
         
@@ -114,9 +144,13 @@ export default class NewPlayer {
 
         // --------------------------------------
         
-        this.child = new Player (slider)
+        // this.child = new Player (slider)
 
-        this.child.init ()
+        // this.child.init ()
+
+        const sliderChild = this.input ()
+
+        slider.appendChild (sliderChild)
 
         // console.log (child)
 
