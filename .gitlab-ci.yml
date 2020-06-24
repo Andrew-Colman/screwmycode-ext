@@ -1,0 +1,13 @@
+stages:
+  - release
+
+release:on-schedule:
+  stage: release
+  image: node:latest
+  only:
+    variables:
+      - $JOB == "release"
+  before_script:
+    - npm install -g semantic-release @semantic-release/gitlab
+  script:
+    - semantic-release
