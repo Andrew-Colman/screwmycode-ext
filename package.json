@@ -12,11 +12,7 @@
   "devDependencies": {
     "@bamdadsabbagh/eslint-config": "^1.2.11",
     "@bamdadsabbagh/stylelint-config": "^1.2.10",
-    "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.11",
     "webextension-toolbox": "latest"
   },
-  "dependencies": {
-    "vue": "^2.6.11"
-  }
+  "dependencies": {}
 }
