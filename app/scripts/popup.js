@@ -5,7 +5,7 @@ import { getBrowser, setState, getState } from './functions/browser'
 import Share from './classes/share'
 
 const checkbox = new Checkbox (document.getElementById ('checkbox'))
-const slider = new Slider (document.getElementsByClassName ('slider')[0])
+const slider = new Slider (document.getElementsByClassName ('slider')[0], 200)
 const percent = new Indicator ('percent', document.getElementById ('newPercent'))
 const tone = new Indicator ('tone', document.getElementById ('newTone'))
 const share = new Share (document.getElementById ('share-link'))

@@ -47,7 +47,7 @@ export default class NewPlayer {
 
         input.innerHTML = 'test'
 
-        this.sliderChild = new Slider (input)
+        this.sliderChild = new Slider (input, 80)
 
         return input
     

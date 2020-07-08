@@ -6,11 +6,11 @@ import { getRainbow } from '../functions/colors'
 
 export default class Slider {
 
-    constructor (slider) {
+    constructor (slider, width) {
         
         this.slider = slider
 
-        this.maxWidth = 80
+        this.maxWidth = width
 
         this.setEvents (this.slider)
     
